@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Battleship</title>
+</head>
+
+<body>
+    <div class="header">
+        <h1>Battleship Game</h1>
+    </div>
+    <div class="main">
+        <div class="description">Let's play a battleship game. Before you can start, you need to place your ships. You
+            should have 10 ships in total: one four-square ship (1), two three-square ships (2), three two-square-ships
+            (3) and four one-square ships (4). After you have placed your ships, you can start the game. You are the
+            first to attack, so choose any square on computer's board and click it!
+        </div>
+        <div class="boards">
+            <div class="board-container">
+                <div class="empty"></div>
+                <div class="x x-1">1</div>
+                <div class="x x-2">2</div>
+                <div class="x x-3">3</div>
+                <div class="x x-4">4</div>
+                <div class="x x-5">5</div>
+                <div class="x x-6">6</div>
+                <div class="x x-7">7</div>
+                <div class="x x-8">8</div>
+                <div class="x x-9">9</div>
+                <div class="x x-10">10</div>
+                <div class="y y-11">11</div>
+                <div class="y y-12">12</div>
+                <div class="y y-13">13</div>
+                <div class="y y-14">14</div>
+                <div class="y y-15">15</div>
+                <div class="y y-16">16</div>
+                <div class="y y-17">17</div>
+                <div class="y y-18">18</div>
+                <div class="y y-19">19</div>
+                <div class="y y-20">20</div>
+                <div class="player-board"></div>
+            </div>
+            <div class="board-container">
+                <div class="empty"></div>
+                <div class="x x-1">1</div>
+                <div class="x x-2">2</div>
+                <div class="x x-3">3</div>
+                <div class="x x-4">4</div>
+                <div class="x x-5">5</div>
+                <div class="x x-6">6</div>
+                <div class="x x-7">7</div>
+                <div class="x x-8">8</div>
+                <div class="x x-9">9</div>
+                <div class="x x-10">10</div>
+                <div class="y y-11">11</div>
+                <div class="y y-12">12</div>
+                <div class="y y-13">13</div>
+                <div class="y y-14">14</div>
+                <div class="y y-15">15</div>
+                <div class="y y-16">16</div>
+                <div class="y y-17">17</div>
+                <div class="y y-18">18</div>
+                <div class="y y-19">19</div>
+                <div class="y y-20">20</div>
+                <div class="computer-board"></div>
+            </div>
+        </div>
+        <button class="place-a-ship">Place a Ship</button>
+        <div class="form-container">
+            <form>
+                <h2>Place your ship</h2>
+                <p>Choose the starting point for your ship. If direction is horizontal, the ship will span squares left
+                    to right. If direction is vertical, the ship will span squares down.</p>
+                <div class="coordinate">
+                    <label for="column">Column (x-coordinate):</label>
+                    <input type="number" id="column" name="column" min="1" max="10" step="1" value="1" required>
+                </div>
+                <div class="coordinate">
+                    <label for="row">Row (y-coordinate):</label>
+                    <input type="number" id="row" name="row" min="11" max="20" step="1" value="11" required>
+                </div>
+                <div class="length">
+                    <label for="length">Length:</label>
+                    <input type="number" id="length" name="length" min="1" max="4" step="1" value="1" required>
+                </div>
+                <div class="direction">
+                    <p>Direction:</p>
+                    <div>
+                        <input type="radio" id="horizontal" name="direction" value="horizontal" checked>
+                        <label for="horizontal">horizontal</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="vertical" name="direction" value="vertical">
+                        <label for="vertical">vertical</label>
+                    </div>
+                </div>
+                <div class="error"></div>
+                <div class="form-buttons">
+                    <button class="submit">Place ship</button>
+                    <button class="cancel" type="button">Cancel</button>
+                </div>
+            </form>
+        </div>
+        <div class="result"></div>
+        <button class="start">Start</button>
+        <button class="restart">Restart</button>
+    </div>
+    <div class="footer">Made by christina172</div>
+
+    <script src="main.js"></script>
+</body>
+
+</html>

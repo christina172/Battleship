@@ -1,6 +1,7 @@
 class Ship {
-    constructor(length) {
+    constructor(length, direction) {
         this.length = length;
+        this.direction = direction;
         this.damage = 0;
         this.sunk = false;
     }
@@ -38,14 +39,10 @@ class Gameboard {
     placeShip(a, b, length, direction) {
         let x = a - 1;
         let y = b - 11;
-        // delete this if I add limit on input
-        if (a < 1 || a > 10 || b < 11 || b > 20) {
-            throw new Error("Can't place your ship outside the board.")
-        };
 
         const startSquare = this.board[y][x];
-        if (startSquare.canPlaceShip == false) {
-            throw new Error("Can't place your new ship here.")
+        if (startSquare.canPlaceShip == false || startSquare.hasShip == true) {
+            throw new Error("You can't place your new ship here. Ships can't overlap and must be at least one square apart from each other.")
         };
 
         let n = 0;
@@ -55,7 +52,7 @@ class Gameboard {
             };
         };
         if ((length == 1 && n == 4) || (length == 2 && n == 3) || (length == 3 && n == 2) || (length == 4 && n == 1)) {
-            throw new Error("Can't place a ship of this size.")
+            throw new Error("You can't place another ship of this size. Please, change the length of your ship.");
         };
 
         let before = x - 1;
@@ -74,10 +71,10 @@ class Gameboard {
 
         if (direction == "horizontal") {
             if ((length == 2 && (after < 0 || after > 9)) || (length == 3 && (after2 < 0 || after2 > 9)) || (length == 4 && (after3 < 0 || after3 > 9))) {
-                throw new Error("Can't place a ship like that. It doesn't fit the board. Please, choose another location.");
+                throw new Error("You can't place a ship like that. It doesn't fit the board. Please, choose another location.");
             };
             if ((length == 2 && this.board[y][after].canPlaceShip == false) || (length == 3 && (this.board[y][after].canPlaceShip == false || this.board[y][after2].canPlaceShip == false)) || (length == 4 && (this.board[y][after].canPlaceShip == false || this.board[y][after2].canPlaceShip == false || this.board[y][after3].canPlaceShip == false))) {
-                throw new Error("Can't place a ship like that. It mustn't overlap other ships and the ships must be at least one square apart from each other. Please, choose another location.");
+                throw new Error("You can't place a ship like that. It can't overlap other ships and must be at least one square apart from other ships. Please, choose another location.");
             };
         };
 
@@ -86,17 +83,16 @@ class Gameboard {
                 throw new Error("Can't place a ship like that. It doesn't fit the board. Please, choose another location.");
             };
             if ((length == 2 && this.board[below][x].canPlaceShip == false) || (length == 3 && (this.board[below][x].canPlaceShip == false || this.board[below2][x].canPlaceShip == false)) || (length == 4 && (this.board[below][x].canPlaceShip == false || this.board[below2][x].canPlaceShip == false || this.board[below3][x].canPlaceShip == false))) {
-                throw new Error("Can't place a ship like that. It mustn't overlap other ships and the ships must be at least one square apart from each other. Please, choose another location.");
+                throw new Error("You can't place a ship like that. It can't overlap other ships and must be at least one square apart from other ships. Please, choose another location.");
             };
         };
 
-        let ship = new Ship(length);
+        let ship = new Ship(length, direction);
 
         this.ships.push(ship);
 
         startSquare.boat = ship;
         startSquare.hasShip = true;
-        startSquare.canPlaceShip = false;
 
         if (above >= 0 && above <= 9) {
             if (before >= 0 && before <= 9) {
@@ -132,8 +128,6 @@ class Gameboard {
             if (length == 2) {
                 this.board[y][after].boat = ship;
                 this.board[y][after].hasShip = true;
-                this.board[y][after].canPlaceShip = false;
-                // this.squaresWithShips.push(this.board[y][after]);
                 if (after2 >= 0 && after2 <= 9) {
                     if (above >= 0 && above <= 9) {
                         this.board[above][after2].canPlaceShip = false;
@@ -154,8 +148,6 @@ class Gameboard {
                 this.board[y][after2].boat = ship;
                 this.board[y][after].hasShip = true;
                 this.board[y][after2].hasShip = true;
-                this.board[y][after].canPlaceShip = false;
-                this.board[y][after2].canPlaceShip = false;
                 if (below >= 0 && below <= 9) {
                     this.board[below][x].canPlaceShip = false;
                     this.board[below][after].canPlaceShip = false;
@@ -180,9 +172,6 @@ class Gameboard {
                 this.board[y][after].hasShip = true;
                 this.board[y][after2].hasShip = true;
                 this.board[y][after3].hasShip = true;
-                this.board[y][after].canPlaceShip = false;
-                this.board[y][after2].canPlaceShip = false;
-                this.board[y][after3].canPlaceShip = false;
                 if (below >= 0 && below <= 9) {
                     this.board[below][x].canPlaceShip = false;
                     this.board[below][after].canPlaceShip = false;
@@ -207,7 +196,6 @@ class Gameboard {
             if (length == 2) {
                 this.board[below][x].boat = ship;
                 this.board[below][x].hasShip = true;
-                this.board[below][x].canPlaceShip = false;
                 if (below2 >= 0 && below2 <= 9) {
                     if (before >= 0 && before <= 9) {
                         this.board[below2][before].canPlaceShip = false;
@@ -226,8 +214,6 @@ class Gameboard {
                 this.board[below2][x].boat = ship;
                 this.board[below][x].hasShip = true;
                 this.board[below2][x].hasShip = true;
-                this.board[below][x].canPlaceShip = false;
-                this.board[below2][x].canPlaceShip = false;
                 if (before >= 0 && before <= 9) {
                     this.board[below2][before].canPlaceShip = false;
                     if (below3 >= 0 && below3 <= 9) {
@@ -252,9 +238,6 @@ class Gameboard {
                 this.board[below][x].hasShip = true;
                 this.board[below2][x].hasShip = true;
                 this.board[below3][x].hasShip = true;
-                this.board[below][x].canPlaceShip = false;
-                this.board[below2][x].canPlaceShip = false;
-                this.board[below3][x].canPlaceShip = false;
                 if (before >= 0 && before <= 9) {
                     this.board[below2][before].canPlaceShip = false;
                     this.board[below3][before].canPlaceShip = false;
@@ -275,15 +258,15 @@ class Gameboard {
                     this.board[below3][after].canPlaceShip = false;
                 };
             };
-        }
-    }
+        };
+    };
     receiveAttack(a, b) {
         let x = a - 1;
         let y = b - 11;
         let attackedSquare = this.board[y][x];
-        if (attackedSquare.missedAttack == true || attackedSquare.successfulAttack == true) {
-            throw new Error("This square has already been attacked");
-        };
+        // if (attackedSquare.missedAttack == true || attackedSquare.successfulAttack == true) {
+        //     throw new Error("This square has already been attacked");
+        // };
         if (attackedSquare.hasShip == true) {
             attackedSquare.successfulAttack = true;
             attackedSquare.boat.hit();
@@ -292,12 +275,12 @@ class Gameboard {
         } else {
             attackedSquare.missedAttack = true;
         };
-    }
+    };
     allShipsAreSunk() {
         if (this.ships.every((element) => element.sunk == true)) {
             this.gameOver = true;
         };
-    }
+    };
 };
 
 class Square {
@@ -336,6 +319,7 @@ class Player {
         this.computerChoices.splice(index, 1);
         enemyBoard.receiveAttack(a, b);
         this.changeTurns(a, b, enemyBoard, opponent);
+        return [a, b];
     }
     changeTurns(a, b, enemyBoard, opponent) {
         let x = a - 1;

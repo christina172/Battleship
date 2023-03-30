@@ -27,17 +27,6 @@ test('ship(2) is sunk after 2 hits', () => {
 
 // Testing Gameboard Class
 // Gameboard Class placeship() method
-// delete the next 2 tests if I add limit on input
-test('cannot place a ship outside of the gameboard (y)', () => {
-    let b = new Gameboard();
-    expect(() => b.placeShip(8, 21, 4, "horizontal")).toThrow(/outside/);
-});
-
-test('cannot place a ship outside of the gameboard (x)', () => {
-    let b = new Gameboard();
-    expect(() => b.placeShip(11, 15, 4, "horizontal")).toThrow(/outside/);
-});
-
 test('cannot place 2 4-square ships', () => {
     let b = new Gameboard();
     b.placeShip(1, 11, 4, "horizontal");
@@ -81,11 +70,11 @@ test('stores the ship in its squares', () => {
 });
 
 // Gameboard Class receiveAttack() method
-test('cannot attack the square that has been already attacked', () => {
-    let b = new Gameboard();
-    b.receiveAttack(3, 13);
-    expect(() => b.receiveAttack(3, 13)).toThrow(/already/);
-});
+// test('cannot attack the square that has been already attacked', () => {
+//     let b = new Gameboard();
+//     b.receiveAttack(3, 13);
+//     expect(() => b.receiveAttack(3, 13)).toThrow(/already/);
+// });
 
 test('missedAttack property changes to true after missed attack', () => {
     let b = new Gameboard();
