@@ -139,7 +139,7 @@ function addEvents(gameboard, name, player, playerBoard, computer) {
                     // checking above row for around squares
                     if (y - 1 > 10) {
                         for (let i = 0; i < 10; i++) {
-                            if (((gameboard.board[y - 11][i].boat != undefined && gameboard.board[y - 11][i].boat.sunk == true) || document.querySelector(`.${name} div[data-y="${y}"][data-x="${i + 1}"]`).dataset.around == "true") && gameboard.board[y - 12][i].canPlaceShip == false) {
+                            if ((gameboard.board[y - 11][i].boat != undefined && gameboard.board[y - 11][i].boat.sunk == true) || (document.querySelector(`.${name} div[data-y="${y}"][data-x="${i + 1}"]`).dataset.around == "true" && ((i > 0 && document.querySelector(`.${name} div[data-y="${y}"][data-x="${i}"]`).dataset.sunk == "true") || (i + 2 < 10 && document.querySelector(`.${name} div[data-y="${y}"][data-x="${i + 2}"]`).dataset.sunk == "true")))) {
                                 const cell = document.querySelector(`.${name} div[data-y="${y - 1}"][data-x="${i + 1}"]`);
                                 cell.dataset.around = true;
                             }
@@ -148,7 +148,7 @@ function addEvents(gameboard, name, player, playerBoard, computer) {
                     // checking below row for around squares
                     if (y + 1 < 21) {
                         for (let i = 0; i < 10; i++) {
-                            if (((gameboard.board[y - 11][i].boat != undefined && gameboard.board[y - 11][i].boat.sunk == true) || document.querySelector(`.${name} div[data-y="${y}"][data-x="${i + 1}"]`).dataset.around == "true") && gameboard.board[y - 10][i].canPlaceShip == false) {
+                            if ((gameboard.board[y - 11][i].boat != undefined && gameboard.board[y - 11][i].boat.sunk == true) || (document.querySelector(`.${name} div[data-y="${y}"][data-x="${i + 1}"]`).dataset.around == "true" && ((i > 0 && document.querySelector(`.${name} div[data-y="${y}"][data-x="${i}"]`).dataset.sunk == "true") || (i + 2 < 10 && document.querySelector(`.${name} div[data-y="${y}"][data-x="${i + 2}"]`).dataset.sunk == "true")))) {
                                 const cell = document.querySelector(`.${name} div[data-y="${y + 1}"][data-x="${i + 1}"]`);
                                 cell.dataset.around = true;
                             }
@@ -182,16 +182,16 @@ function addEvents(gameboard, name, player, playerBoard, computer) {
                     // checking above row for around squares
                     if (y - 1 > 10) {
                         for (let i = 0; i < 10; i++) {
-                            if (((gameboard.board[y - 11][i].boat != undefined && gameboard.board[y - 11][i].boat.sunk == true) || document.querySelector(`.${name} div[data-y="${y}"][data-x="${i + 1}"]`).dataset.around == "true") && gameboard.board[y - 12][i].canPlaceShip == false) {
+                            if ((gameboard.board[y - 11][i].boat != undefined && gameboard.board[y - 11][i].boat.sunk == true) || (document.querySelector(`.${name} div[data-y="${y}"][data-x="${i + 1}"]`).dataset.around == "true" && ((i > 0 && document.querySelector(`.${name} div[data-y="${y}"][data-x="${i}"]`).dataset.sunk == "true") || (i + 2 < 10 && document.querySelector(`.${name} div[data-y="${y}"][data-x="${i + 2}"]`).dataset.sunk == "true")))) {
                                 const cell = document.querySelector(`.${name} div[data-y="${y - 1}"][data-x="${i + 1}"]`);
                                 cell.dataset.around = true;
-                            }
+                            };
                         };
                     };
                     // checking below row for around squares
                     if (y + 1 < 21) {
                         for (let i = 0; i < 10; i++) {
-                            if (((gameboard.board[y - 11][i].boat != undefined && gameboard.board[y - 11][i].boat.sunk == true) || document.querySelector(`.${name} div[data-y="${y}"][data-x="${i + 1}"]`).dataset.around == "true") && gameboard.board[y - 10][i].canPlaceShip == false) {
+                            if ((gameboard.board[y - 11][i].boat != undefined && gameboard.board[y - 11][i].boat.sunk == true) || (document.querySelector(`.${name} div[data-y="${y}"][data-x="${i + 1}"]`).dataset.around == "true" && ((i > 0 && document.querySelector(`.${name} div[data-y="${y}"][data-x="${i}"]`).dataset.sunk == "true") || (i + 2 < 10 && document.querySelector(`.${name} div[data-y="${y}"][data-x="${i + 2}"]`).dataset.sunk == "true")))) {
                                 const cell = document.querySelector(`.${name} div[data-y="${y + 1}"][data-x="${i + 1}"]`);
                                 cell.dataset.around = true;
                             }
@@ -225,7 +225,7 @@ function addEvents(gameboard, name, player, playerBoard, computer) {
                     // checking before column for around squares
                     if (x - 1 > 0) {
                         for (let i = 0; i < 10; i++) {
-                            if (((gameboard.board[i][x - 1].boat != undefined && gameboard.board[i][x - 1].boat.sunk == true) || document.querySelector(`.${name} div[data-y="${i + 11}"][data-x="${x}"]`).dataset.around == "true") && gameboard.board[i][x - 2].canPlaceShip == false) {
+                            if ((gameboard.board[i][x - 1].boat != undefined && gameboard.board[i][x - 1].boat.sunk == true) || (document.querySelector(`.${name} div[data-y="${i + 11}"][data-x="${x}"]`).dataset.around == "true" && ((i + 10 > 10 && document.querySelector(`.${name} div[data-y="${i + 10}"][data-x="${x}"]`).dataset.sunk == "true") || (i + 12 < 21 && document.querySelector(`.${name} div[data-y="${i + 12}"][data-x="${x}"]`).dataset.sunk == "true")))) {
                                 const cell = document.querySelector(`.${name} div[data-y="${i + 11}"][data-x="${x - 1}"]`);
                                 cell.dataset.around = true;
                             }
@@ -234,7 +234,7 @@ function addEvents(gameboard, name, player, playerBoard, computer) {
                     // checking after column for around squares
                     if (x + 1 < 11) {
                         for (let i = 0; i < 10; i++) {
-                            if (((gameboard.board[i][x - 1].boat != undefined && gameboard.board[i][x - 1].boat.sunk == true) || document.querySelector(`.${name} div[data-y="${i + 11}"][data-x="${x}"]`).dataset.around == "true") && gameboard.board[i][x].canPlaceShip == false) {
+                            if ((gameboard.board[i][x - 1].boat != undefined && gameboard.board[i][x - 1].boat.sunk == true) || (document.querySelector(`.${name} div[data-y="${i + 11}"][data-x="${x}"]`).dataset.around == "true" && ((i + 10 > 10 && document.querySelector(`.${name} div[data-y="${i + 10}"][data-x="${x}"]`).dataset.sunk == "true") || (i + 12 < 21 && document.querySelector(`.${name} div[data-y="${i + 12}"][data-x="${x}"]`).dataset.sunk == "true")))) {
                                 const cell = document.querySelector(`.${name} div[data-y="${i + 11}"][data-x="${x + 1}"]`);
                                 cell.dataset.around = true;
                             }
