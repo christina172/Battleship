@@ -242,21 +242,21 @@ function addEvents(gameboard, name, player, playerBoard, computer) {
                     }
                 }
             };
-            // const disable = document.querySelectorAll(`.${name} div[data-around="true"]`);
-            // disable.forEach((square) => {
-            //     square.removeEventListener("click", attack, { once: true });
-            // });
+            const disable = document.querySelectorAll(`.${name} div[data-around="true"]`);
+            disable.forEach(square => square.replaceWith(square.cloneNode()));
             player.changeTurns(x, y, gameboard, computer);
             while (player.turn == false) {
                 let target = computer.attackEnemy(playerBoard, player);
                 getAttackedByComputer(target[0], target[1], playerBoard, "player");
                 if (playerBoard.gameOver == true) {
                     gameIsOver("GAME OVER. You lost! All your ships are sunk.");
+                    squaresDom.forEach(spot => spot.replaceWith(spot.cloneNode()));
                     break;
                 };
             };
             if (gameboard.gameOver == true) {
                 gameIsOver("GAME OVER. You won! Congratulations! All of the opponent's ships are sunk.");
+                squaresDom.forEach(spot => spot.replaceWith(spot.cloneNode()));
             };
         };
     });

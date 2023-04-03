@@ -168,20 +168,21 @@ div[data-success="true"],
 
 div[data-missed="true"],
 div[data-around="true"],
+div[data-around="true"]:hover,
 .computer div[data-missed="true"]:hover {
     background-color: rgb(83, 206, 255);
 }
 
 div[data-missed="true"]::before {
     content: "x";
-    text-align: center;
+    padding: 0 5px;
     color: rgb(0, 145, 202);
     font-weight: bold;
 }
 
 div[data-success="true"]::before {
     content: "x";
-    text-align: center;
+    padding: 0 5px;
     color: rgb(136, 83, 58);
     font-weight: bold;
 }
@@ -194,7 +195,7 @@ div[data-success="true"]::before {
 
 div[data-sunk="true"]::before {
     content: "x";
-    text-align: center;
+    padding: 0 5px;
     color: red;
     font-weight: bold;
 }
